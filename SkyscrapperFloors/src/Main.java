@@ -22,17 +22,17 @@ public class Main {
 			
 			startFloor = s.nextInt();
 			endFloor = s.nextInt();
-			for(int j = 0; j < elevators; j++) {//for each elevator
+			for(int j = 0; j < elevators; j++) {
 				int mod = s.nextInt();
 				int startFloor = s.nextInt();
-				for(int k = startFloor; k < numOfFloors; k= k + mod) {//mark all its stops
+				for(int k = startFloor; k < numOfFloors; k= k + mod) {//mark all stops on each elevator
 					elevatorList.get(j).put(k, 1);
 				}
 			}
 			boolean foundRoute = false;
 			for(int e = 0; e < elevatorList.size(); e++) {// does any 1 elevator stop at the start and end floor
 				HashMap<Integer,Integer> elevator = elevatorList.get(e);
-				if(elevator.containsKey(startFloor) && elevator.containsKey(endFloor)) {//if so 
+				if(elevator.containsKey(startFloor) && elevator.containsKey(endFloor)) {//if so we don't need to merge
 					foundRoute = true;
 				}
 			}
@@ -41,14 +41,14 @@ public class Main {
 				boolean keepMerging = true;
 				while(keepMerging) {//while there are no elevators left to merge
 					allElevatorStops.putAll(elevatorList.removeFirst());
-					boolean continueMerging = false;
+					boolean merged = false;
 					for(HashMap<Integer,Integer> elevator : elevatorList ) {//for each elevator remaining
-						if(mergeElevators(elevator, allElevatorStops)) {//if merged
-							elevatorList.remove(elevator);
-							continueMerging = true;
+						if(mergeElevators(elevator, allElevatorStops)) {//if merged successful
+							elevatorList.remove(elevator);//remove it
+							merged = true;
 						}
 					}
-					if(!continueMerging) {
+					if(!merged) {// if no elevators are merged, then were done
 						keepMerging = false;
 					}
 		
