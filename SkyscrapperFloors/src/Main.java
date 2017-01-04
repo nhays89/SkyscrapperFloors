@@ -1,44 +1,83 @@
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Scanner;
 
 public class Main {
 	
 	static Scanner s;
-	static int startIndex;
-	static int endIndex;
+	static int startFloor;
+	static int endFloor;		
 	static int numOfFloors;
 	static int elevators;
-	static ArrayList<LinkedList<Integer>> elevatorArray;
-	static LinkedList<Integer> allElevatorStops;
+	static LinkedList<HashMap<Integer, Integer>> elevatorList;
+	
 	public static void main(String[] args) {
 		s = new Scanner(System.in);
 		int numOfCases = s.nextInt();
+		
 		for(int i = 0; i < numOfCases; i++) {
 			numOfFloors = s.nextInt();
 			elevators = s.nextInt();
-			elevatorArray = new ArrayList<LinkedList<Integer>>(elevators);
-			allElevatorStops = new LinkedList<Integer>;
-			startIndex = s.nextInt();
-			endIndex = s.nextInt();
-			for(int j = 0; j < elevators; j++) {
+			elevatorList = new LinkedList<HashMap<Integer, Integer>>();
+			
+			startFloor = s.nextInt();
+			endFloor = s.nextInt();
+			for(int j = 0; j < elevators; j++) {//for each elevator
 				int mod = s.nextInt();
 				int startFloor = s.nextInt();
-				for(int k = startFloor; k < numOfFloors; k= k + mod)
-				elevatorArray.get(k).add(k);
+				for(int k = startFloor; k < numOfFloors; k= k + mod) {//mark all its stops
+					elevatorList.get(j).put(k, 1);
+				}
 			}
+			boolean foundRoute = false;
+			for(int e = 0; e < elevatorList.size(); e++) {// does any 1 elevator stop at the start and end floor
+				HashMap<Integer,Integer> elevator = elevatorList.get(e);
+				if(elevator.containsKey(startFloor) && elevator.containsKey(endFloor)) {//if so 
+					foundRoute = true;
+				}
+			}
+			if(!foundRoute) {//merge the elevators together to find all possible stops if they overlap
+				HashMap<Integer, Integer> allElevatorStops = new HashMap<Integer, Integer>();
+				boolean keepMerging = true;
+				while(keepMerging) {//while there are no elevators left to merge
+					allElevatorStops.putAll(elevatorList.removeFirst());
+					boolean continueMerging = false;
+					for(HashMap<Integer,Integer> elevator : elevatorList ) {//for each elevator remaining
+						if(mergeElevators(elevator, allElevatorStops)) {//if merged
+							elevatorList.remove(elevator);
+							continueMerging = true;
+						}
+					}
+					if(!continueMerging) {
+						keepMerging = false;
+					}
+		
+				}
+				if(allElevatorStops.containsKey(startFloor) && allElevatorStops.containsKey(endFloor)) {
+					foundRoute = true;
+				}
+			}
+			
+			if(foundRoute) {
+				System.out.println("It is possible to move the furniture.");
+			} else {
+				System.out.println("The furniture cannot be moved.");
+			}
+			
 		}
 	}
 	
-	public void addStops(LinkedList<Integer> eleToMatch) {
-		int index = allElevatorStops.removeFirst();
-		Iterator<Integer> itrMatch = eleToMatch.iterator();
-		Iterator<Integer> itrAllStops = allElevatorStops.iterator();
-		while(itr.hasNext()) {
-			Integer theStop = itrMatch.next();
-			while(theStop)
+	/*
+	 * Will merge 'elToMerge' elevator with 'allElevatorStops' elevator only if they have overlapping stops.
+	
+	 */
+	public static boolean mergeElevators(HashMap<Integer, Integer> elToMerge,HashMap<Integer, Integer> allStops ) {
+		for(Integer key: elToMerge.keySet()) {
+			if(allStops.containsKey(key)) {
+				allStops.putAll(elToMerge);
+				return true;
+			}
 		}
+		return false;
 	}
-
 }
