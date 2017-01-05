@@ -43,8 +43,8 @@ that the elevator starts on the <em>Y</em> -th floor and <em>X</em> determines, 
 
 ##Output
 For each case, print exactly one line. If floor <em>B</em> is reachable from floor <em>A</em> not using the stairway, print
-the sentence **‘It is possible to move the furniture.’**, otherwise print **‘The furniture cannot
-be moved.’**.
+the sentence **‘It is possible to move the furniture.’** otherwise print **‘The furniture cannot
+be moved.’**
 
 ##Solution
 For this problem, its tempting to build a recursive algorithm that checks all possible stops from the starting floor to 
