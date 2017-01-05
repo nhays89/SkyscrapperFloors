@@ -28,7 +28,7 @@ The ACM has a big problem. The headquarters should be moved to another office th
 possibly on a different floor. Unfortunately, the high-capacity elevator is out of order right now so it is
 not always possible to go to the base floor. One piece of furniture cannot be moved using the stairway
 because it is too large to pass through the stairway door. You are to write a program that decides
-whether it is possible to move a piece of furniture from the original office to the other
+whether it is possible to move a piece of furniture from the original office to the other.
 
 
 ##Input
