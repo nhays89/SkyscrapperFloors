@@ -47,8 +47,8 @@ the sentence **‘It is possible to move the furniture.’** otherwise print **�
 be moved.’**
 
 ##Solution
-For this problem, its tempting to build a recursive algorithm that checks all possible stops from the starting floor to 
-the ending floor, but the input size is simply to large. Instead, lets leverage the idea that if an elevator, e<sub><em>i</em></sub>, stops on a floor
+For this problem, its tempting to build a recursive algorithm that checks all possible stops from the starting floor, Y, to 
+the ending floor, X, but the input size is simply to large. Instead, lets leverage the idea that if an elevator, e<sub><em>i</em></sub>, stops on a floor
 that overlaps with another elevator, e<sub><em>j</em></sub>, then a piece of furniture can move to and from any stop of either elevator. The merge between the two elevators
 creates an elevator, e<sub><em>m</em></sub>, that represents all possible stops of each elevator (e<sub><em>i</em></sub> +  e<sub><em>j</em></sub>). Therefore, lets extend this idea to each remaining elevator, e<sub><em>k</em></sub>, in the input, gradually
 increasing the number of all possible stops as we merge elevators with e<sub><em>m</em></sub>. There may be the case, however, in which an elevator, e<sub><em>i</em></sub>, does
