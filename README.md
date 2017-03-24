@@ -1,4 +1,4 @@
-#[SkyScrapper Floors](https://icpcarchive.ecs.baylor.edu/index.php?option=com_onlinejudge&Itemid=8&category=416&page=show_problem&problem=3545)
+# [SkyScrapper Floors](https://icpcarchive.ecs.baylor.edu/index.php?option=com_onlinejudge&Itemid=8&category=416&page=show_problem&problem=3545)
 
 European Reginals ICPC programming problem. 1998. Time: 3 seconds.
 
@@ -8,7 +8,7 @@ European Reginals ICPC programming problem. 1998. Time: 3 seconds.
 
 </p>
 
-##Problem
+## Problem
 What a great idea it is to build skyscrapers! Using not too large area of land, which is very expensive
 in many cities today, the skyscrapers offer an extremely large utility area for flats or offices. The only
 disadvantage is that it takes too long to get to the upper floors. Of course these skyscrapers have to
@@ -31,7 +31,7 @@ because it is too large to pass through the stairway door. You are to write a pr
 whether it is possible to move a piece of furniture from the original office to the other.
 
 
-##Input
+## Input
 The input consists of <em>N</em> cases. The first line contains only one positive integer <em>N</em>. Then follow the
 cases. Each case starts with a line containing four integers <em>F</em>,<em>E</em>, <em>A</em>, <em>B</em>, where <em>F</em>, 1 ≤ <em>F</em> < 50000000
 determines the number of floors in the skyscraper (this means that there are floors 0 to <em>F</em> − 1), <em>E</em>,
@@ -41,12 +41,12 @@ of one elevator. There are exactly two integers <em>X</em> and <em>Y</em> , <em>
 that the elevator starts on the <em>Y</em> -th floor and <em>X</em> determines, that it stops on every <em>X</em>-th floor, e.g. for
 <em>X</em> = 3, <em>Y</em> = 7 the elevator stops on floors 7, 10, 13, 16, etc.).
 
-##Output
+## Output
 For each case, print exactly one line. If floor <em>B</em> is reachable from floor <em>A</em> not using the stairway, print
 the sentence **‘It is possible to move the furniture.’** otherwise print **‘The furniture cannot
 be moved.’**
 
-##Solution
+## Solution
 For this problem, its tempting to build a recursive algorithm that checks all possible stops from the starting floor, Y, to 
 the ending floor, X, but the input size is simply to large. Instead, lets leverage the idea that if an elevator, e<sub><em>i</em></sub>, stops on a floor
 that overlaps with another elevator, e<sub><em>j</em></sub>, then a piece of furniture can move to and from any stop of either elevator. The merge between the two elevators
